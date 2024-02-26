@@ -1554,63 +1554,66 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b>Hᴇʏ {message.from_user.mention}, Hᴇʀᴇ ɪs Wʜᴀᴛ I Fᴏᴜɴᴅ Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search}.</b>"
-    if imdb and imdb.get('poster'):
-        try:
-            hehe = await l3.edit_text(text=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
-            try:
-                if settings['auto_delete']:
-                    await asyncio.sleep(600)
-                    await hehe.delete()
-                    await message.delete()
-            except KeyError:
-                await save_group_settings(message.chat.id, 'auto_delete', True)
-                await asyncio.sleep(600)
-                await hehe.delete()
-                await message.delete()
-        except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
-            pic = imdb.get('poster')
-            poster = pic.replace('.jpg', "._V1_UX360.jpg")
-            hmm = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
-            try:
-                if settings['auto_delete']:
-                    await asyncio.sleep(600)
-                    await hmm.delete()
-                    await message.delete()
-            except KeyError:
-                await save_group_settings(message.chat.id, 'auto_delete', True)
-                await asyncio.sleep(600)
-                await hmm.delete()
-                await message.delete()
-        except Exception as e:
-            logger.exception(e)
-            fek = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-            try:
-                if settings['auto_delete']:
-                    await asyncio.sleep(600)
-                    await fek.delete()
-                    await message.delete()
-            except KeyError:
-                await save_group_settings(message.chat.id, 'auto_delete', True)
-                await asyncio.sleep(600)
-                await fek.delete()
-                await message.delete()
-    else:
-        fuk = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+      l3 = None
+
+cap = f"<b>Hᴇʏ {message.from_user.mention}, Hᴇʀᴇ ɪs Wʜᴀᴛ I Fᴏᴜɴᴅ Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search}.</b>"
+
+if imdb and imdb.get('poster'):
+    try:
+        l3 = await some_function_to_get_message_object()  # Initialize l3 with the message object
+        hehe = await l3.edit_text(text=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
         try:
             if settings['auto_delete']:
                 await asyncio.sleep(600)
-                await fuk.delete()
+                await hehe.delete()
                 await message.delete()
         except KeyError:
             await save_group_settings(message.chat.id, 'auto_delete', True)
             await asyncio.sleep(600)
+            await hehe.delete()
+            await message.delete()
+    except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
+        pic = imdb.get('poster')
+        poster = pic.replace('.jpg', "._V1_UX360.jpg")
+        hmm = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
+        try:
+            if settings['auto_delete']:
+                await asyncio.sleep(600)
+                await hmm.delete()
+                await message.delete()
+        except KeyError:
+            await save_group_settings(message.chat.id, 'auto_delete', True)
+            await asyncio.sleep(600)
+            await hmm.delete()
+            await message.delete()
+    except Exception as e:
+        logger.exception(e)
+        fek = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+        try:
+            if settings['auto_delete']:
+                await asyncio.sleep(600)
+                await fek.delete()
+                await message.delete()
+        except KeyError:
+            await save_group_settings(message.chat.id, 'auto_delete', True)
+            await asyncio.sleep(600)
+            await fek.delete()
+            await message.delete()
+else:
+    fuk = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+    try:
+        if settings['auto_delete']:
+            await asyncio.sleep(600)
             await fuk.delete()
             await message.delete()
-    if spoll:
-        await msg.message.delete()
+    except KeyError:
+        await save_group_settings(message.chat.id, 'auto_delete', True)
+        await asyncio.sleep(600)
+        await fuk.delete()
+        await message.delete()
 
-
+if spoll:
+    await msg.message.delete()  
 async def advantage_spell_chok(client, msg, search, reply):
     k = await msg.reply_text(
         text=f"""Hey {msg.from_user.mention}, 
