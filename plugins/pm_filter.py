@@ -1553,7 +1553,7 @@ async def auto_filter(client, msg, spoll=False):
             url=imdb['url'],
             **locals()
         )
-   cap = f"<b>Hᴇʏ {message.from_user.mention}, Hᴇʀᴇ ɪs Wʜᴀᴛ I Fᴏᴜɴᴅ Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search}.</b>"
+cap = f"<b>Hᴇʏ {message.from_user.mention}, Hᴇʀᴇ ɪs Wʜᴀᴛ I Fᴏᴜɴᴅ Iɴ Mʏ Dᴀᴛᴀʙᴀsᴇ Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ {search}.</b>"
 
 if imdb and imdb.get('poster'):
     try:
@@ -1610,6 +1610,7 @@ else:
 
 if spoll:
     await msg.message.delete()
+
 
 else:
     fuk = await message.reply_photo(photo='https://graph.org/file/6cbfdd4b48fc6852d360f.jpg', caption=cap, reply_markup=InlineKeyboardMarkup(btn))
